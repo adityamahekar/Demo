@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADITYA G MAHEKAR - Extended Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors inspired by Hindustan Times */
+            --ht-blue: #004080; 
+            --ht-red: #cc0000;   
+            --ht-grey: #666;
+            --ht-light-grey: #f0f0f0;
+            --font-serif: 'Playfair Display', serif; /* Used for main headings */
+            --font-sans-serif: 'Roboto', sans-serif; /* Used for body text */
+            --border-color: #eee;
+            --border-thin: 1px solid var(--border-color);
+        }
+
+        body {
+            font-family: var(--font-sans-serif);
+            margin: 0;
+            padding: 0;
+            background-color: var(--ht-light-grey);
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px; /* Approximate newspaper width */
+            margin: 10px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- Header: Adapt to Portfolio Name and Contact --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            border-bottom: 3px double var(--ht-blue);
+            padding-bottom: 10px;
+        }
+
+        .header .logo {
+            flex-grow: 0;
+            width: 300px;
+        }
+        .header .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .header .portfolio-info {
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--ht-grey);
+            flex-grow: 1;
+        }
+
+        .header .portfolio-name {
+            font-family: Arial, sans-serif; 
+            font-size: 3em;
+            font-weight: bold;
+            color: #222; 
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        .header .contact-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-top: 5px;
+        }
+        .header .contact-details a {
+            color: var(--ht-blue);
+            text-decoration: none;
+            margin-bottom: 2px;
+            font-weight: 500;
+        }
+        .header .location {
+            font-weight: bold;
+            color: var(--ht-red);
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+
+        /* --- Top Headlines Grid: Used for a key feature/summary --- */
+        .top-headlines-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; 
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: var(--border-thin);
+            padding-bottom: 15px;
+        }
+        .headline-box {
+            background-color: var(--ht-light-grey);
+            padding: 10px;
+            font-size: 0.9em;
+            border-left: 3px solid var(--ht-blue);
+        }
+        .headline-box h3 {
+             font-family: var(--font-serif);
+             font-size: 1.2em;
+        }
+        .headline-box .source {
+            color: var(--ht-red);
+        }
+        /* --- Image/Chart Placeholder Styling (B&W images from Lorem Picsum/Placeholder) --- */
+        .image-placeholder {
+            width: 100%;
+            height: 80px;
+            background-color: #ccc;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: block;
+            background-image: url('https://picsum.photos/seed/tech/400/80?grayscale');
+            background-size: cover;
+        }
+        
+        .article .image-right {
+            float: right;
+            width: 40%;
+            height: 100px;
+            background-color: #ddd;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            background-image: url('https://picsum.photos/seed/robotics/150/100?grayscale');
+            background-size: cover;
+        }
+        .article .image-small {
+            width: 100%;
+            height: 120px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+            background-image: url('https://picsum.photos/seed/coding/400/120?grayscale');
+            background-size: cover;
+        }
+        .article .image-full-width {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+            background-image: url('https://picsum.photos/seed/blockchain/800/200?grayscale');
+            background-size: cover;
+        }
+
+
+        /* --- Main Content Grid: Layout for Portfolio Sections --- */
+        .main-content-grid {
+            /* This is the key structural element, keeping the 1fr 2fr 1fr grid */
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; 
+            gap: 20px;
+        }
+        .left-column, .middle-column, .right-column {
+            /* This flex container allows content blocks to stack and fill the column */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- Article Styles: Used for Portfolio Sections/Items --- */
+        .article {
+            border-bottom: var(--border-thin);
+            padding-bottom: 15px;
+        }
+        .article:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .article h2 {
+            font-family: var(--font-serif);
+            font-size: 2em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--ht-blue);
+            border-bottom: 2px solid var(--ht-red);
+            padding-bottom: 5px;
+        }
+        .article h3 {
+            font-family: var(--font-serif);
+            font-size: 1.2em;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        .article .meta {
+            font-size: 0.75em;
+            color: var(--ht-grey);
+            margin-bottom: 10px;
+            font-weight: bold;
+            display: block;
+        }
+        .article p {
+            font-size: 0.9em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .article .label {
+            display: inline-block;
+            background-color: var(--ht-blue);
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Education & Experience Details */
+        .education-detail, .experience-detail {
+            border-left: 3px solid var(--ht-red);
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+        .education-detail .cgpa {
+            font-style: italic;
+            font-size: 0.8em;
+            color: var(--ht-blue);
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Skills Layout */
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skills-list li {
+            font-size: 0.9em;
+            color: var(--ht-blue);
+            margin-bottom: 5px;
+        }
+        .skills-list li strong {
+            color: #222;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        /* Projects Grid (Middle Column) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px;
+        }
+        .projects-grid .article {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .projects-grid .article h3 {
+            font-size: 1em;
+            color: var(--ht-red);
+        }
+
+        /* Activity Section */
+        .activity-item {
+            border-left: 3px solid var(--ht-blue);
+            padding-left: 10px;
+        }
+
+        /* Language Item Style */
+        .language-item {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="header">
+            <div class="logo">
+                <img src="image_3a7065.png" alt="Colored Logo Image">
+            </div>
+            <div class="portfolio-info">
+                <h1 class="portfolio-name">ADITYA G MAHEKAR</h1>
+                <div class="location">Karwar, India, IN-581304</div>
+                <div class="contact-details">
+                    <span>+919480100787</span>
+                    <a href="mailto:mahekaraditya468@gmail.com">mahekaraditya468@gmail.com</a>
+                    <a href="www.linkedin.com/in/adityamahekar" target="_blank">www.linkedin.com/in/adityamahekar</a>
+                    <a href="github.com/adityamahekar" target="_blank">github.com/adityamahekar</a>
+                </div>
+            </div>
+        </header>
+
+        
+        <section class="top-headlines-grid">
+            <div class="headline-box">
+                <span class="source">KEY FOCUS</span>
+                <h3>FULL-STACK WEB DEVELOPMENT & ROBOTICS AUTOMATION</h3>
+                <p>Seeking roles that leverage dual knowledge in software engineering and mechanical systems for innovative solutions.</p>
+            </div>
+            <div class="headline-box" style="border-left-color: var(--ht-red);">
+                <span class="source">TECH SKILLS</span>
+                <h3>REACT.JS, NODE.JS, PYTHON & C-CORE PROGRAMMING</h3>
+                <p>Proficient in modern and fundamental programming stacks for building robust and scalable applications.</p>
+            </div>
+            <div class="headline-box">
+                <span class="source">ACADEMIA</span>
+                <div class="image-placeholder"></div>
+                <h3>DIPLOMA CGPA 9.56/10 IN MECHANICAL ENGINEERING</h3>
+                <p>Strong analytical foundation demonstrated through consistent academic excellence.</p>
+            </div>
+        </section>
+
+        
+        <main class="main-content-grid">
+            
+            <div class="left-column">
+                
+                <div class="article">
+                    <h2>Profile Summary</h2>
+                    <p>Highly motivated **Fresher** with a Bachelor of Engineering in Computer Science and a strong technical background in Mechanical Engineering (CGPA-9.56/10). Eager to apply proficiency in **Full-Stack Web Development** (React.js, Node.js) and core programming (Java, Python, C) to solve real-world problems. Proven project experience in both **Education Technology** and **Automation & Robotics**, complemented by a keen interest in **Emerging Technologies** like Blockchain and IoT.</p>
+                    <p>Seeking challenging opportunities to contribute to high-impact software and automation projects.</p>
+                </div>
+
+                <div class="article">
+                    <h2>Education</h2>
+                    <div class="education-detail">
+                        <h3>BMS Institute of Technology & Management</h3>
+                        <span class="meta">Bachelor of Engineering in Computer Science</span>
+                    </div>
+                    <div class="education-detail">
+                        <h3>Government Polytechnic College, Karwar</h3>
+                        <span class="meta">Diploma in Mechanical Engineering</span>
+                        <span class="cgpa">CGPA-9.56/10</span>
+                    </div>
+                </div>
+
+                <div class="article">
+                    <h2>Languages Known</h2>
+                    <div class="language-item">**English:** Professional Working Proficiency</div>
+                    <div class="language-item">**Hindi:** Full Professional Proficiency</div>
+                    <div class="language-item">**Marathi:** Native Proficiency</div>
+                    <div class="language-item">**Kannada:** Native Proficiency</div>
+                </div>
+
+                <div class="article">
+                    <div class="image-small"></div>
+                    <span class="label">SKILL DEEP DIVE</span>
+                    <h3>DATABASE & APIS</h3>
+                    <p>Experience with MySQL, PostgreSQL, RESTful API design, and securing endpoints through Authentication mechanisms.</p>
+                </div>
+                
+                <div class="article no-border">
+                    <h2>Experience</h2>
+                    <div class="experience-detail">
+                        <h3>Fresher</h3>
+                        <span class="meta">CURRENT OPPORTUNITIES</span>
+                        <p>Currently seeking opportunities to apply my skills and knowledge in real-world projects, focusing on software development and emerging technologies.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div class="middle-column">
+                
+                <div class="article">
+                    <h2>Projects: Web & Robotics</h2>
+                    
+                    <div class="projects-grid">
+                        <div class="article">
+                            <span class="label">Education Technology Platform</span>
+                            <span class="meta">HTML, CSS, JAVASCRIPT</span>
+                            <p>An innovative Ed-Tech platform designed to enhance learning through interactive content and personalized learning paths, built using modern web standards.</p>
+                        </div>
+                        <div class="article">
+                            <span class="label" style="background-color: #555;">Pick and Place Robot</span>
+                            <span class="meta">AUTOMATION & ROBOTICS, CNC</span>
+                            <p>An automated robotic system capable of identifying, picking, and placing objects with precision, combining mechanical principles with software control for industrial applications.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article">
+                    <span class="label">PROJECT FOCUS: EXPANDED FEATURES</span>
+                    <div class="image-full-width"></div>
+                    <h3>IMPLEMENTATION OF INTERACTIVE LEARNING MODULES</h3>
+                    <p>The Ed-Tech platform utilized **DOM Manipulation** and **jQuery** for highly interactive front-end elements, creating a dynamic user interface. The backend planning involved scalable architecture for user authentication.</p>
+                </div>
+
+                <div class="article">
+                    <h2>Technical Skills: Full Breakdown</h2>
+                    <ul class="skills-list">
+                        <li><strong>Programming Languages:</strong> Java, C, Python, JavaScript, CNC</li>
+                        <li><strong>Web Development:</strong> HTML5, CSS3, JavaScript, React.js, Node.js, Express.js, React Toolkit, jQuery, DOM Manipulation</li>
+                        <li><strong>Database & APIs:</strong> MySQL, PostgreSQL, APIs, Authentication</li>
+                        <li><strong>Emerging Technologies:</strong> Blockchain Technology, NFT Mining, IoT, Automation & Robotics, Robotic Simulation</li>
+                        <li><strong>Tools & Platforms:</strong> Git, GitHub, Version Control, Bash Command Line, Microsoft Office</li>
+                        <li><strong>Design & Methodology:</strong> UI/UX Design, Web Design, Data Visualization, Agile Methodologies</li>
+                        <li><strong>Key Courses:</strong> Data Structures & Algorithms, Operating Systems, MongoDB, Python</li>
+                    </ul>
+                </div>
+                
+                <div class="article">
+                    <span class="label" style="background-color: var(--ht-red);">EMERGING TECH APPLICATION</span>
+                    <h3>SIMULATING ROBOTIC ARM CONTROL IN CNC ENVIRONMENTS</h3>
+                    <p>Applied CNC programming knowledge to robotic simulation, demonstrating cross-disciplinary control system understanding essential for industrial automation tasks.</p>
+                </div>
+
+            </div>
+
+            
+            <div class="right-column">
+                
+                <div class="article">
+                    <h2>Activities</h2>
+                    <div class="activity-item">
+                        <h3>Rotary Club Member</h3>
+                        <span class="meta">COMMUNITY SERVICE & LEADERSHIP</span>
+                        <p>Active member contributing to community service initiatives and social welfare programs, participating in various community development activities and charity events. Demonstrated leadership and organizational skills.</p>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <span class="label">KEY COURSEWORK HIGHLIGHTS</span>
+                    <h3>DATA STRUCTURES & ALGORITHMS (DS&A)</h3>
+                    <p>Mastery of fundamental data structures and algorithms, crucial for writing efficient and scalable code, directly applicable in competitive programming and system design.</p>
+                </div>
+
+                <div class="article">
+                    <span class="label">DEVELOPMENT TOOLS</span>
+                    <div class="image-right"></div>
+                    <h3>GIT, GITHUB & VERSION CONTROL</h3>
+                    <p>Proficient in using Git and GitHub for collaborative development, code merging, branching, and maintaining project history effectively, ensuring team efficiency.</p>
+                </div>
+                
+                <div class="article">
+                    <span class="label" style="background-color: black;">DESIGN PHILOSOPHY</span>
+                    <h3>A USER-CENTRIC AGILE APPROACH</h3>
+                    <p>Employing **Agile Methodologies** coupled with strong **UI/UX Design** principles to deliver products that are both functionally robust and intuitive for the end-user.</p>
+                </div>
+
+                <div class="article no-border">
+                    <div class="activity-item" style="border-left-color: var(--ht-red);">
+                        <h3>BLOCKCHAIN & NFT MINING CONCEPTS</h3>
+                        <span class="meta">SELF-STUDY AND EXPLORATION</span>
+                        <p>Independently explored the underlying mechanisms of **Blockchain Technology** and basic concepts of **NFT Mining**, demonstrating initiative in learning decentralized systems.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+
+        
+        <footer class="footer-promo" style="background-color: var(--ht-red);">
+            <div class="left">
+                Hire<span>Me!</span>
+            </div>
+            <div class="right">
+                <p>READY TO CONTRIBUTE</p>
+                <p>View Full Resume <span style="font-weight: bold;">Online</span></p>
+                <a href="mailto:mahekaraditya468@gmail.com" class="btn">Email Now</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
