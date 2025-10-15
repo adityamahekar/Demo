@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindustan Times Replica (Simplified)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ht-blue: #004080; /* A dark blue for Hindustan Times logo */
+            --ht-red: #cc0000;  /* A red for highlights */
+            --ht-grey: #666;
+            --ht-light-grey: #f0f0f0;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans-serif: 'Roboto', sans-serif;
+            --border-color: #eee;
+            --border-thin: 1px solid var(--border-color);
+        }
+
+        body {
+            font-family: var(--font-sans-serif);
+            margin: 0;
+            padding: 0;
+            background-color: var(--ht-light-grey);
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px; /* Approximate newspaper width */
+            margin: 10px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- Header --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            border-bottom: 3px double var(--ht-blue);
+            padding-bottom: 10px;
+        }
+
+        .header .logo {
+            font-family: Arial, sans-serif; /* Placeholder, actual is custom */
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--ht-blue);
+            letter-spacing: -2px;
+            flex-grow: 1;
+        }
+        .header .logo span {
+            color: var(--ht-red);
+        }
+
+        .header .date-weather {
+            text-align: right;
+            font-size: 0.8em;
+            color: var(--ht-grey);
+        }
+        .header .ht-live {
+            background-color: var(--ht-red);
+            color: white;
+            padding: 2px 5px;
+            font-size: 0.7em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        /* --- Top Headlines Grid --- */
+        .top-headlines-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; /* Example: Small, Medium, Small */
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: var(--border-thin);
+            padding-bottom: 15px;
+        }
+
+        .headline-box {
+            background-color: var(--ht-light-grey);
+            padding: 10px;
+            font-size: 0.9em;
+            border-left: 3px solid var(--ht-blue);
+        }
+        .headline-box.red-border {
+            border-left-color: var(--ht-red);
+        }
+        .headline-box h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .headline-box p {
+            margin: 0;
+            font-size: 0.8em;
+            color: var(--ht-grey);
+        }
+        .headline-box .source {
+            font-size: 0.7em;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .headline-box .image-placeholder {
+            width: 100%;
+            height: 80px;
+            background-color: #ccc;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* --- Main Content Grid --- */
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; /* Left, Middle, Right columns */
+            gap: 20px;
+        }
+
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .middle-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- Article Styles --- */
+        .article {
+            border-bottom: var(--border-thin);
+            padding-bottom: 15px;
+        }
+        .article:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .article.no-border {
+            border-bottom: none;
+        }
+
+        .article h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        .article h3 {
+            font-family: var(--font-serif);
+            font-size: 1.2em;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        .article .meta {
+            font-size: 0.75em;
+            color: var(--ht-grey);
+            margin-bottom: 10px;
+        }
+        .article p {
+            font-size: 0.9em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .article .caption {
+            font-size: 0.7em;
+            color: var(--ht-grey);
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .article .label {
+            display: inline-block;
+            background-color: var(--ht-blue);
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .article .label.red {
+            background-color: var(--ht-red);
+        }
+        .article .image-full-width {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+        }
+        .article .image-small {
+            width: 100%;
+            height: 120px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+        }
+        .article .image-right {
+            float: right;
+            width: 40%;
+            height: 100px;
+            background-color: #ddd;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+        .article .read-more {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: var(--ht-blue);
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* --- Special Sections --- */
+        .promo-box {
+            background-color: #f7f7f7;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .promo-box h4 {
+            margin-top: 0;
+            font-size: 1.1em;
+            color: var(--ht-blue);
+        }
+        .promo-box .discount {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--ht-red);
+            margin-bottom: 5px;
+        }
+        .promo-box p {
+            font-size: 0.85em;
+            margin-top: 0;
+            color: #555;
+        }
+        .promo-box .btn {
+            display: inline-block;
+            background-color: var(--ht-blue);
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .ad-banner {
+            width: 100%;
+            height: 80px;
+            background-color: #eee;
+            border: 1px dashed #ccc;
+            text-align: center;
+            line-height: 80px;
+            font-size: 0.9em;
+            color: var(--ht-grey);
+            margin-bottom: 20px;
+        }
+
+        /* Specific Layout sections from the image */
+
+        .tatas-move-sc {
+            grid-column: 1 / 3; /* Spans across two columns */
+        }
+        .tatas-move-sc h2 {
+            font-size: 2.2em;
+        }
+        .tatas-move-sc .label {
+            background-color: black;
+            font-size: 0.8em;
+            padding: 5px 10px;
+        }
+
+        .article-with-image-left {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .article-with-image-left .image-small {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            background-color: #ccc; /* Replace with actual image */
+        }
+        .article-with-image-left .content {
+            flex-grow: 1;
+        }
+        .article-with-image-left h3 {
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        .article-with-image-left p {
+            font-size: 0.8em;
+        }
+
+        .chart-article {
+            border-bottom: var(--border-thin);
+            padding-bottom: 15px;
+        }
+        .chart-article .chart-placeholder {
+            width: 100%;
+            height: 150px;
+            background-color: #e0f0ff;
+            border: 1px solid #c0d0e0;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .glacier-image-article .label {
+            background-color: #333;
+            font-size: 0.75em;
+        }
+        .glacier-image-article .image-full-width {
+            height: 180px;
+        }
+
+        .flex-row-articles {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .flex-row-articles .article {
+            flex: 1;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .flex-row-articles .article h3 {
+            font-size: 1.1em;
+        }
+
+        .footer-promo {
+            background-color: var(--ht-blue);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        .footer-promo .left {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .footer-promo .right {
+            text-align: right;
+        }
+        .footer-promo .right .btn {
+            background-color: white;
+            color: var(--ht-blue);
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">hindustan<span>times</span></div>
+            <div class="date-weather">
+                <div class="ht-live">hindustantimes.com</div>
+                <div class="location">THURSDAY | JANUARY 16, 2020</div>
+                <div>NEW DELHI | °C 23/9 °C | VOL XVIII NO. 14</div>
+            </div>
+        </header>
+
+        <section class="top-headlines-grid">
+            <div class="headline-box">
+                <span class="source">MINT</span>
+                <h3>MIKEL ARTETA EARNS 1st WIN AS ARSENAL BEAT MANCHESTER UNITED 2-0</h3>
+                <p>Lacazette and Sokratis score as Arsenal secure first Premier League win under new manager Arteta.</p>
+            </div>
+            <div class="headline-box red-border">
+                <span class="source">INDIAN NAVY'S SYRIAN PLOY</span>
+                <h3>'IT IS STUPID TO PUT LABELS ON FILMS'</h3>
+                <p>Naseeruddin Shah on the need to have a film policy for OTT platforms, censorship and more.</p>
+            </div>
+            <div class="headline-box">
+                <span class="source">THE WASHINGTON POST</span>
+                <div class="image-placeholder"></div>
+                <h3>Trump administration tightens sanctions on Iran</h3>
+                <p>New sanctions target Iranian officials, oil, and metals sectors.</p>
+            </div>
+        </section>
+
+        <main class="main-content-grid">
+            <div class="left-column">
+                <div class="article tatas-move-sc">
+                    <span class="label">LEGAL CHALLENGE</span>
+                    <h2>Tatas move SC against NCLAT order on Mistry</h2>
+                    <p class="meta">NEW DELHI: The Tata Group has moved the Supreme Court challenging a National Company Law Appellate Tribunal (NCLAT) order that reinstated Cyrus Mistry as the chairman of Tata Sons.</p>
+                    <div class="article-with-image-left">
+                        <div class="image-small"></div>
+                        <div class="content">
+                            <h3>LEGAL TUSSLE</h3>
+                            <p>IN DECEMBER, NCLAT had ordered Mistry to be reinstated. Tata Sons called the order "unlawful".</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article">
+                    <span class="label">IPO MEALS AT ₹10-20</span>
+                    <h3>BY JAN 26</h3>
+                    <p>NEW DELHI: After months of speculation, the central government is likely to issue a notification for the sale of stake in LIC of India by January 26.</p>
+                </div>
+                <div class="article">
+                    <h3>NO TIE-UPS WITH REGIONAL PARTIES ON REPUBLIC DAY</h3>
+                    <p>The opposition parties in Jammu and Kashmir are preparing for a major political rally on Republic Day, but without any alliances.</p>
+                </div>
+                <div class="article">
+                    <h3>BAZINGA OF MARSHALS FOR SECURITY AGAINST MAOIST REBELS</h3>
+                    <p>RANCHI: Jharkhand Police has deployed thousands of security personnel in the Maoist-affected areas ahead of Republic Day.</p>
+                </div>
+                <div class="article no-border">
+                    <h3>NEW BUMPER SHORT FILM IN UPAAD WILL BE RELEASED</h3>
+                    <p>MUMBAI: A short film titled 'Upaad' starring actor Vinay Pathak is set to be released digitally soon.</p>
+                </div>
+            </div>
+
+            <div class="middle-column">
+                <div class="article flex-row-articles">
+                    <div class="article">
+                        <div class="image-right"></div>
+                        <h3>No portfolios yet, but ministers get offices</h3>
+                        <p class="meta">NEW DELHI: The new cabinet ministers in Maharashtra have started working from temporary offices.</p>
+                    </div>
+                    <div class="article">
+                        <div class="image-small"></div>
+                        <h3>CAA Opponents should protest over Pak atrocities: PM</h3>
+                        <p class="meta">JAIPUR: Prime Minister Narendra Modi on Thursday urged those protesting against the Citizenship Amendment Act (CAA) to also protest against atrocities on minorities in Pakistan.</p>
+                    </div>
+                </div>
+
+                <div class="article">
+                    <h2>Early signs raise hopes of an economic revival</h2>
+                    <div class="chart-article">
+                        <div class="chart-placeholder">
+                            (Chart: A break in growth deceleration? - Placeholder)
+                        </div>
+                        <p class="caption">Source: RBI, CSO. Data updated till December 2019.</p>
+                        <p>The latest indicators from various sectors suggest that the Indian economy might be showing early signs of a turnaround after a period of slowdown.</p>
+                    </div>
+                </div>
+
+                <div class="article">
+                    <h3>Centre sets up desk for Ayodhya matters</h3>
+                    <p class="meta">NEW DELHI: The government has set up a dedicated desk in the Ministry of Home Affairs to look into matters related to the Ayodhya verdict and the construction of a Ram Temple.</p>
+                </div>
+
+                <div class="article glacier-image-article">
+                    <span class="label">IT'S A SNOWY GLACIER, NOT A SAND DUNE</span>
+                    <div class="image-full-width"></div>
+                    <p class="caption">"Our team was stunned by this. It's truly a beautiful phenomenon."</p>
+                    <p>Scientists have discovered a rare glacier in a desert region, defying conventional geographical understanding.</p>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="ad-banner">Advertisement</div>
+
+                <div class="article">
+                    <span class="label">NATIONAL</span>
+                    <h3>State mulls a special public security law for Gadchiroli region</h3>
+                    <p class="meta">NAGPUR: The Maharashtra government is considering a special public security law for the naxal-affected Gadchiroli region.</p>
+                </div>
+                <div class="article">
+                    <span class="label">CBI</span>
+                    <h3>CBI seeks plan on how to boost command to boost security in skies</h3>
+                    <p class="meta">NEW DELHI: The Central Bureau of Investigation (CBI) has asked for a detailed action plan from the Directorate General of Civil Aviation (DGCA) to enhance security measures at airports.</p>
+                </div>
+
+                <div class="article">
+                    <h3>Sit-in continues at Shaheen Bagh after being 'called off'</h3>
+                    <div class="image-small"></div>
+                    <p class="meta">NEW DELHI: Despite claims that the Shaheen Bagh protest against CAA was "called off," protesters continue to occupy the site.</p>
+                </div>
+
+                <div class="article">
+                    <span class="label">AT KOTA HOSPITAL</span>
+                    <h3>Parties trade barbs over deaths of more than 100 infants</h3>
+                    <p class="meta">KOTA: Political parties are engaged in a blame game over the deaths of more than 100 infants at a government hospital in Kota, Rajasthan.</p>
+                </div>
+
+                <div class="article">
+                    <h3>Ghosn had 2nd French passport locked in a case</h3>
+                    <p class="meta">TOKYO: Fugitive former Nissan chairman Carlos Ghosn had a second French passport locked in a case in his Tokyo home, his lawyers have revealed.</p>
+                </div>
+
+                <div class="article no-border">
+                    <h3>Fireman dies in Delhi factory blaze</h3>
+                    <p class="meta">NEW DELHI: A fireman died while battling a massive fire that broke out in a factory in Delhi's Peeragarhi area.</p>
+                    <div class="image-small"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer-promo">
+            <div class="left">
+                7.50<span>%</span>
+            </div>
+            <div class="right">
+                <p>FIXED DEPOSIT</p>
+                <p>Powered by <span style="font-weight: bold;">Bank Name</span></p>
+                <a href="#" class="btn">Apply Now</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
